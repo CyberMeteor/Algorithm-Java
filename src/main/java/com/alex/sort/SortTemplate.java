@@ -82,6 +82,35 @@ public class SortTemplate {
         }
     }
 
+    // Three-way Quick Sort
+    public void threeWayQuickSort(int[] array, int low, int high) {
+        if (low < high) {
+            int[] pivotIndices = partition2(array, low, high);
+            threeWayQuickSort(array, low, pivotIndices[0] - 1);
+            threeWayQuickSort(array, pivotIndices[1] + 1, high);
+        }
+    }
+
+    private int[] partition2(int[] array, int low, int high) {
+        int pivot = array[low];
+        int lt = low;
+        int gt = high;
+        int i = low + 1;
+
+        while (i <= gt) {
+            if (array[i] < pivot) {
+                swap(array, lt++, i++);
+                continue;
+            }
+            if (array[i] > pivot) {
+                swap(array, i, gt--);
+                continue;
+            }
+            i++;
+        }
+        return new int[]{lt, gt};
+    }
+
 
     /*-------------------------------- common -------------------------------------------*/
 
