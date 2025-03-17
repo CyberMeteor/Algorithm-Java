@@ -34,7 +34,6 @@ public class StackTemplate {
     /**
      * Valid bracket
      */
-
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         for (char c : s.toCharArray()) {
@@ -52,5 +51,35 @@ public class StackTemplate {
             }
         }
         return stack.isEmpty();
+    }
+
+    /**
+     *  Largest rectangle area
+     */
+    public int largestRectangleArea(int[] heights) {
+        if (heights.length == 0) return 0;
+
+        Stack<Integer> stack = new Stack<>();
+        int max = 0;
+
+        for (int i = 0; i <= heights.length; i++) {
+            int cur = 0;
+            if (i < heights.length) {
+                cur = heights[i];
+            }
+
+            while (!stack.isEmpty() && cur <= heights[stack.peek()]) {
+                int index = stack.pop();
+                int h =  heights[index];
+                int w = i;
+                if (!stack.isEmpty()) {
+                    int peek = stack.peek();
+                    w = i - peek - 1;
+                }
+                max = Math.max(max, w * h);
+            }
+            stack.push(i);
+        }
+        return max;
     }
 }
