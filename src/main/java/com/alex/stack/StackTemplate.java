@@ -82,4 +82,49 @@ public class StackTemplate {
         }
         return max;
     }
+
+    /**
+     * Implement queue
+     */
+    static class MyQueue {
+        private final Stack<Integer> stack1 = new Stack<>();
+        private final Stack<Integer> stack2 = new Stack<>();
+
+        // Initialize data structure
+        public MyQueue() {}
+
+        // Push element x to the back of the queue
+        public void push(int x) {
+            while (! stack2.isEmpty()) {
+                int val = stack2.pop();
+                stack1.push(val);
+            }
+            stack1.push(x);
+        }
+
+        // Remove the element from the front of the queue and return that element
+        public int pop() {
+            while (!stack1.isEmpty()) {
+                int val = stack1.pop();
+                stack2.push(val);
+            }
+            if (stack2.isEmpty()) return -1;
+            return stack2.pop();
+        }
+
+        // Get the front element
+        public int peek() {
+            while (!stack1.isEmpty()) {
+                int val = stack1.pop();
+                stack2.push(val);
+            }
+            if (stack2.isEmpty()) return -1;
+            return stack2.peek();
+        }
+
+        // Return whether the queue is empty
+        public boolean empty() {
+            return stack1.isEmpty() && stack2.isEmpty();
+        }
+    }
 }
