@@ -1,8 +1,6 @@
 package com.alex.treenode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class TreeNodeTemplate {
     static class TreeNode {
@@ -90,4 +88,42 @@ public class TreeNodeTemplate {
         return result;
     }
 
+
+    // DFS
+    public void dfs(TreeNode p, StringBuilder path, List<String> paths) {
+        if (p == null) {
+            return;
+        }
+        path.append(p.val);
+
+        if (p.left == null && p.right == null) {
+            paths.add(path.toString());
+            return;
+        }
+
+        path.append("->");
+        dfs(p.left, new StringBuilder(path), paths);
+        dfs(p.right, new StringBuilder(path), paths);
+    }
+
+    // BFS
+    public List<Integer> levelOrder(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode p = queue.poll();
+            result.add(p.val);
+            if (p.left != null) {
+                queue.add(p.left);
+            }
+            if (p.right != null) {
+                queue.add(p.right);
+            }
+        }
+        return result;
+    }
 }
