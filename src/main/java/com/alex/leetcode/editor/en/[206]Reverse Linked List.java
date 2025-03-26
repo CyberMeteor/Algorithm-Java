@@ -48,7 +48,7 @@ class reverseLinkedList{
         // TO TEST
     }
     //Definition for singly-linked list.
-    public class ListNode {
+    private class ListNode {
         int val;
         ListNode next;
         ListNode() {}
